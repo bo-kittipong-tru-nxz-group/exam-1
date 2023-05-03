@@ -40,7 +40,7 @@ jobs:
 
       - run: |
           cd ./exam-2 
-          touch text.txt
+          touch text-2.txt
       
       - run: |
           echo ${{ github.run_number }}

@@ -22,22 +22,29 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      # - name: Checkout ${{ inputs.argocd-repo }} reposiory
-      #   uses: actions/checkout@v3
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     repository: kittipong-nxz/exam-2
-      #     path: ./exam-2 
+      - name: Generate token
+        id: generate-token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }} 
+
+      - name: Checkout ${{ inputs.argocd-repo }} reposiory
+        uses: actions/checkout@v3
+        with:
+          repository: kittipong-nxz/exam-2
+          token: ${{ steps.generate-token.outputs.token }}
+          path: ./exam-2 
 
       - run: |
+          cd ./exam-2 
           touch text.txt
 
       - name: Commit and push changes
         run: |
+          cd ./exam-2 
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .

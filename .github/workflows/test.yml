@@ -48,6 +48,7 @@ jobs:
           length: 6
 
       - run: |
+          echo ${{ github.run_id }}
           echo ${{ steps.short-sha.outputs.sha }}
           echo ${{ github.run_number }}
           echo ${{ github.run_attempt }}

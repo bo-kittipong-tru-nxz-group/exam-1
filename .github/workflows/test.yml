@@ -41,6 +41,10 @@ jobs:
       - run: |
           cd ./exam-2 
           touch text.txt
+      
+      - run: |
+          echo ${{ github.run_number }}
+          echo ${{ github.run_attempt }}
 
       - name: Commit and push changes
         run: |

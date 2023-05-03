@@ -40,8 +40,8 @@ jobs:
       - name: Commit and push changes
         run: |
           cd ./exam-2  
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
           git commit -am "test"
           git push

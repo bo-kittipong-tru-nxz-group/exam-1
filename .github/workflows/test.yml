@@ -1,64 +1,33 @@
-# This is a basic workflow to help you get started with Actions
+name: ci test
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+   build-and-deploy-nonprd:
+    permissions:
+      checks: write
+      contents: read
+      pull-requests: write
+      id-token: 'write'
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
-
-      - name: Generate token
-        id: generate-token
-        uses: tibdex/github-app-token@v1
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }} 
-
-      - name: Checkout ${{ inputs.argocd-repo }} reposiory
-        uses: actions/checkout@v3
-        with:
-          repository: kittipong-nxz/exam-2
-          token: ${{ steps.generate-token.outputs.token }}
-          path: ./exam-2 
-
-      - run: |
-          cd ./exam-2 
-          touch text-2.txt
-
-      - uses: benjlevesque/short-sha@v2.2
-        id: short-sha
-        with:
-          length: 6
-
-      - run: |
-          echo ${{ github.run_id }}
-          echo ${{ steps.short-sha.outputs.sha }}
-          echo ${{ github.run_number }}
-          echo ${{ github.run_attempt }}
-
-      # - name: Commit and push changes
-      #   run: |
-      #     cd ./exam-2 
-      #     git config user.name github-actions[bot]
-      #     git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      #     git add .
-      #     git commit -am "test"
-      #     git push
       
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.13.0
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: 'projects/206279441114/locations/global/workloadIdentityPools/github-identity-pool/providers/github-identity-pool'
+          # service_account: 'github-actions-sa@oceanft-stg.iam.gserviceaccount.com'
+          # workload_identity_provider: 'projects/206279441114/locations/global/workloadIdentityPools/github-actions/providers/github-actions'
+          service_account: 'github-actions-sa@oceanft-stg.iam.gserviceaccount.com'
+          
+      - name: Deploy
+        run: |
+          firebase use stg
+
+  

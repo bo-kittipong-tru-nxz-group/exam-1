@@ -23,14 +23,13 @@ jobs:
       - id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
-          # workload_identity_provider: 'projects/206279441114/locations/global/workloadIdentityPools/github-identity-pool/providers/github-identity-pool'
+          workload_identity_provider: 'projects/206279441114/locations/global/workloadIdentityPools/github-identity-pool/providers/github-identity-pool'
           # service_account: 'github-actions-sa@oceanft-stg.iam.gserviceaccount.com'
-          workload_identity_provider: 'projects/206279441114/locations/global/workloadIdentityPools/github-actions/providers/github-actions'
+          # workload_identity_provider: 'projects/206279441114/locations/global/workloadIdentityPools/github-actions/providers/github-actions'
           service_account: 'github-actions-sa@oceanft-stg.iam.gserviceaccount.com'
           
       - name: Deploy
         run: |
           firebase use stg
 
-  
   

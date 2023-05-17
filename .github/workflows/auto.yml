@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - "main"
-  
+
+env:
+  runner-label: production
+
 jobs:
    test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "auto"
+      - run: echo ${{ runner-label }}

@@ -12,4 +12,4 @@ jobs:
    test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ runner-label }}
+      - run: echo ${{ env.runner-label }}

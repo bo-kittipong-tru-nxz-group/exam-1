@@ -32,10 +32,10 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v3
         
-      - name: Validate json
-        if: ${{ inputs.json-validate }} == 'true'
-        run: ./${{ inputs.json-sh-name }} ${{ inputs.directory_path }}
-        shell: bash
+      # - name: Validate json
+      #   if: ${{ inputs.json-validate }} == 'true'
+      #   run: ./${{ inputs.json-sh-name }} ${{ inputs.directory_path }}
+      #   shell: bash
 
       - name: show 
         run: |

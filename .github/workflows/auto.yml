@@ -9,44 +9,51 @@ jobs:
   init-workflow:
     name: Setup environments for workflow
     runs-on: ubuntu-latest
+    outputs:
+      dev-cache-path: "/development/*"
+      stg-cache-path: "/staging/*"
+      prd-cache-path: "/production/*"
     steps:
       - run: echo 1
-  gen-init:
+  show:
     needs:
       - init-workflow
     runs-on: ubuntu-latest
     steps:
-      - run: echo 2
+      - run: |
+          echo ${{ needs.init-workflow.outputs.dev-cache-path }}
+          echo ${{ needs.init-workflow.outputs.stg-cache-path }}
+          echo ${{ needs.init-workflow.outputs.prd-cache-path }}
 
-  test-code:
-    needs:
-      - init-workflow
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 3
+  # test-code:
+  #   needs:
+  #     - init-workflow
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo 3
 
-  build-push-image:
-    needs: 
-     - init-workflow
-     - gen-init
-     - test-code
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 4
+  # build-push-image:
+  #   needs: 
+  #    - init-workflow
+  #    - gen-init
+  #    - test-code
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo 4
 
-  deploy:
-    needs:
-    - init-workflow
-    - gen-init
-    - build-push-image
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 5
+  # deploy:
+  #   needs:
+  #   - init-workflow
+  #   - gen-init
+  #   - build-push-image
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo 5
 
-  slack-noti:
-    if: always()
-    needs:
-    - deploy
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 6
+  # slack-noti:
+  #   if: always()
+  #   needs:
+  #   - deploy
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo 6

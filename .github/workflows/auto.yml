@@ -19,7 +19,7 @@ on:
 jobs:
   init:
     name: Run genarate initial variables env,image-tag 
-    runs-on: ubuntu-lalest
+    runs-on: ubuntu-latest
 
     outputs:
       environment: ${{ steps.setvars.outputs.environment }}

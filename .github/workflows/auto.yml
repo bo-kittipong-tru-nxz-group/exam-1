@@ -46,9 +46,6 @@ jobs:
   slack-noti:
     if: always()
     needs:
-    - init-workflow
-    - test-code
-    - build-push-image
     - deploy
     runs-on: ubuntu-latest
     steps:

@@ -4,10 +4,6 @@ run-name: Run workflow :${{ github.event.head_commit.message }}
 
 on: 
   push:
-    branches:
-      - feature/**
-      - develop
-      - release/**
       
 jobs:
   init-workflow:

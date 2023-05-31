@@ -5,3 +5,5 @@ on:
 jobs:
    test:
     uses: kittipong-nxz/exam-1/.github/workflows/setvar.yaml@main
+    with:
+      label-runner: ubuntu-lalest

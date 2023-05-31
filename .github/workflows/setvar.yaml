@@ -18,9 +18,9 @@ on:
 jobs:
   init:
     name: Run genarate initial variables env,image-tag 
-    runs-on: 
-      - self-hosted
-      - ${{ inputs.label-runner }}
+    runs-on: ubuntu-lalest
+      # - self-hosted
+      # - ${{ inputs.label-runner }}
       
     outputs:
       environment: ${{ steps.setvars.outputs.environment }}

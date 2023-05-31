@@ -2,14 +2,6 @@ name: auto
 
 on:
   push:
-    branches:
-      - "main"
-
-env:
-  runner-label: production
-
 jobs:
    test:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ${{ env.runner-label }}
+    uses: .github/workflows/setvar.yaml

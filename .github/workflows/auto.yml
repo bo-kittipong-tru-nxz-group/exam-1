@@ -56,9 +56,11 @@ jobs:
           IMAGE_TAG: ${{ steps.setvars.outputs.environment }}-${{ steps.short-sha.outputs.sha }}-${{ github.run_number }}-${{ github.run_attempt }}
           ENVIROMMENT: ${{ steps.setvars.outputs.environment }}
         run: |
-          if $ENVIROMMENT == 'prd'
+          if [ $ENVIROMMENT -eq 'prd' ]
           then
             echo "image=${{ github.ref_name }}" >> $GITHUB_OUTPUT
           else
             echo "image=$IMAGE_TAG" >> $GITHUB_OUTPUT 
           fi
+      - name: show
+        run: echo ${{ steps.tag-image.outputs.image }}

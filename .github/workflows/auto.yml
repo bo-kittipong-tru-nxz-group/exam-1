@@ -19,7 +19,7 @@ jobs:
     name: Upload development to S3
     needs:
       - init-workflow
-    uses: kittipong/exam1/.github/workflows/s3.yaml@main
+    uses: kittipong-nxz/exam1/.github/workflows/s3.yaml@main
     with:
       s3_bucket: ddd
       directory_path: dd

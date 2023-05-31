@@ -4,4 +4,4 @@ on:
   push:
 jobs:
    test:
-    uses: .github/workflows/setvar.yaml
+    uses: .github/workflows/setvar.yaml@main

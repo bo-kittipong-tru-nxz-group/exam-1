@@ -3,9 +3,9 @@ name: CICD workflow for nonprd
 run-name: Run workflow :${{ github.event.head_commit.message }}
 
 on: 
-  push:
-    branches:
-      - "develop"
+  # push:
+  #   branches:
+  #     - "develop"
   pull_request:
     branches:
       - "feature/**"

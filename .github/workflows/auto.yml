@@ -6,11 +6,19 @@ on:
   push:
     branches:
       - "develop"
+      - "release/**"
+    tags:
+      - '*'
   pull_request:
     branches:
-      - "feature/**"
+      - "develop"
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
       - run: echo "HELLO"
+      - run: echo "${{ github.event.head_commit.message }}"

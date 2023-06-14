@@ -4,58 +4,13 @@ run-name: Run workflow :${{ github.event.head_commit.message }}
 
 on: 
   push:
-      
+    branches:
+      - "develop"
+  pull_request:
+    branches:
+      - "feature/**"
 jobs:
-  init-workflow:
-    name: Setup environments for workflow
+  job1:
     runs-on: ubuntu-latest
-    outputs:
-      dev-cache-path: "/development/*"
-      stg-cache-path: "/staging/*"
-      prd-cache-path: "/production/*"
     steps:
-      - run: echo 1
-  show:
-    name: Upload development to S3
-    needs:
-      - init-workflow
-    uses: kittipong-nxz/exam-1/.github/workflows/s3.yaml@main
-    with:
-      s3_bucket: ddd
-      directory_path: dd
-      invalidation_cache_path: ${{ needs.init-workflow.outputs.dev-cache-path }}
-      cloudfront_id: ddd
-
-
-  # test-code:
-  #   needs:
-  #     - init-workflow
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo 3
-
-  # build-push-image:
-  #   needs: 
-  #    - init-workflow
-  #    - gen-init
-  #    - test-code
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo 4
-
-  # deploy:
-  #   needs:
-  #   - init-workflow
-  #   - gen-init
-  #   - build-push-image
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo 5
-
-  # slack-noti:
-  #   if: always()
-  #   needs:
-  #   - deploy
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo 6
+      - run: echo "HELLO"
